@@ -1,4 +1,4 @@
-name: TRADE ACADEMY - Mobile Check
+name: TRADE ACADEMY - Mobile Build
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
     branches: [main]
 
 jobs:
-  check:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -15,7 +15,43 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22.13.1
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
       - name: Install dependencies
         run: npm install
       - name: Expo Doctor
         run: npx expo-doctor
+
+  android-release:
+    runs-on: ubuntu-latest
+    needs: verify
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.1
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Generate native Android project
+        run: npx expo prebuild --platform android --non-interactive
+      - name: Build release APK
+        working-directory: android
+        run: ./gradlew assembleRelease --no-daemon
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: trade-academy-android
+          path: android/app/build/outputs/apk/release/*.apk
+          if-no-files-found: error
