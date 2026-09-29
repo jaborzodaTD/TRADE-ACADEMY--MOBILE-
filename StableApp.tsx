@@ -1,4 +1,4 @@
-import React,{useState}from"react";
+import React,{useState,useEffect,useMemo}from"react";
 import{SafeAreaView,StatusBar,View,Text,Pressable,StyleSheet,TextInput,KeyboardAvoidingView,Platform,ScrollView}from"react-native";
 type Lang="ru"|"tj"; type Screen="welcome"|"home"|"chat"|"terminal"|"quiz"|"risk";
 export default function StableApp(){
