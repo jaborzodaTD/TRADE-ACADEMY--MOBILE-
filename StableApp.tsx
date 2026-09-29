@@ -1,4 +1,5 @@
-import React,{useState,useEffect,useMemo}from"react";\nimport {askMentor} from "./ai/mentorEngine";
+import React,{useState,useEffect,useMemo}from"react";
+import {askMentor} from "./ai/mentorEngine";
 import{SafeAreaView,StatusBar,View,Text,Pressable,StyleSheet,TextInput,KeyboardAvoidingView,Platform,ScrollView}from"react-native";
 type Lang="ru"|"tj"; type Screen="welcome"|"home"|"academy"|"chat"|"terminal"|"quiz"|"risk";
 function shuffle<T>(a:T[]):T[]{const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]];}return x;}
