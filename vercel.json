@@ -1,6 +1,7 @@
 {
+  "version": 2,
   "functions": {
-    "api/mentor.ts": {
+    "api/mentor.js": {
       "maxDuration": 30
     }
   }
