@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/mentor.ts": {
+      "maxDuration": 30
+    }
+  }
+}
